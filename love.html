@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgb(255, 0, 140);
+            transform: rotate(-45deg);
+            animation: move 5s infinite alternate;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgb(235, 9, 114);
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+        @keyframes move {
+            0% {
+                transform: translate(0, 0) rotate(-45deg);
+            }
+            100% {
+                transform: translate(200px, 0) rotate(-45deg);
+            }
+        }
+        #message {
+            position: absolute;
+            font-size: 24px;
+            color: #d9534f;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart" id="heart1"></div>
+    <div class="heart" id="heart2" style="animation-direction: alternate-reverse;"></div>
+    <div id="message">I LOVE !</div>
+
+    <script>
+        const heart1 = document.getElementById('heart1');
+        const heart2 = document.getElementById('heart2');
+        const message = document.getElementById('message');
+
+        heart1.addEventListener('animationiteration', () => {
+            heart1.style.animationDirection = heart1.style.animationDirection === 'normal' ? 'reverse' : 'normal';
+            heart2.style.animationDirection = heart2.style.animationDirection === 'normal' ? 'reverse' : 'normal';
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
